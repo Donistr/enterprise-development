@@ -1,0 +1,77 @@
+﻿@using DispatchTransportControl.Shared.DTO
+@inject IApiClientWrapper ApiClient
+
+<Modal @ref="DriverModal">
+    <ModalContent Centered>
+        <Form>
+            <ModalHeader>
+                <ModalTitle>Новый водитель</ModalTitle>
+                <CloseButton Clicked="CloseDriverModalAsync" />
+            </ModalHeader>
+
+            <ModalBody>
+                <Field>
+                    <FieldLabel>Имя</FieldLabel>
+                    <TextEdit @bind-Text="@NewDriver.Name" />
+                </Field>
+                <Field>
+                    <FieldLabel>Фамилия</FieldLabel>
+                    <TextEdit @bind-Text="@NewDriver.Surname"/>
+                </Field>
+                <Field>
+                    <FieldLabel>Отчество</FieldLabel>
+                    <TextEdit @bind-Text="@NewDriver.Patronymic"/>
+                </Field>
+                <Field>
+                    <FieldLabel>Паспорт</FieldLabel>
+                    <TextEdit @bind-Text="@NewDriver.Passport"/>
+                </Field>
+                <Field>
+                    <FieldLabel>Водительское удостоверение</FieldLabel>
+                    <TextEdit @bind-Text="@NewDriver.DriverLicense"/>
+                </Field>
+                <Field>
+                    <FieldLabel>Адрес</FieldLabel>
+                    <TextEdit @bind-Text="@NewDriver.Address"/>
+                </Field>
+                <Field>
+                    <FieldLabel>Телефон</FieldLabel>
+                    <TextEdit @bind-Text="@NewDriver.Phone"/>
+                </Field>
+            </ModalBody>
+
+            <ModalFooter>
+                <Button Color="Color.Secondary" Clicked="CloseDriverModalAsync">Отмена</Button>
+                <Button Color="Color.Primary" Clicked="CreateDriverAsync">Создать</Button>
+            </ModalFooter>
+        </Form>
+    </ModalContent>
+</Modal>
+
+@code {
+    [Parameter]
+    public EventCallback OnDriverAdded { get; set; }
+
+    private Modal DriverModal { get; set; } = new();
+    private DriverCreateDto NewDriver { get; set; } = new()
+    {
+        Name = "",
+        Surname = "",
+        Patronymic = "",
+        Passport = "",
+        DriverLicense = "",
+        Address = "",
+        Phone = ""
+    };
+
+    public async Task Show() => await DriverModal.Show();
+
+    private async Task CloseDriverModalAsync() => await DriverModal.Hide();
+
+    private async Task CreateDriverAsync()
+    {
+        await ApiClient.CreateDriver(NewDriver);
+        await DriverModal.Hide();
+        await OnDriverAdded.InvokeAsync();
+    }
+}

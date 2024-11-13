@@ -1,0 +1,108 @@
+﻿@page "/driver/{Id}"
+@using DispatchTransportControl.Shared.DTO
+
+@inject IApiClientWrapper ApiClient
+@inject IJSRuntime JsRuntime
+
+<Card>
+	<CardHeader>
+        <Row Class="justify-content-between">
+            <Column ColumnSize="ColumnSize.IsAuto">
+                <h4>Изменить водителя</h4>
+            </Column>
+            <Column ColumnSize="ColumnSize.IsAuto">
+                <Button Color="Color.Primary" Clicked="UpdateDriverAsync">
+                    Сохранить
+                </Button>
+                <Button Color="Color.Danger" Clicked="DeleteDriverAsync">
+                    Удалить
+                </Button>
+                <Button Color="Color.Secondary" onclick="history.back();">
+                    Закрыть
+                </Button>
+            </Column>
+        </Row>
+	</CardHeader>
+
+    <CardBody>
+        <Field>
+            <FieldLabel>Имя</FieldLabel>
+            <TextEdit @bind-Text="@UpdatedDriver.Name" />
+        </Field>
+        <Field>
+            <FieldLabel>Фамилия</FieldLabel>
+            <TextEdit @bind-Text="@UpdatedDriver.Surname"/>
+        </Field>
+        <Field>
+            <FieldLabel>Отчество</FieldLabel>
+            <TextEdit @bind-Text="@UpdatedDriver.Patronymic"/>
+        </Field>
+        <Field>
+            <FieldLabel>Паспорт</FieldLabel>
+            <TextEdit @bind-Text="@UpdatedDriver.Passport"/>
+        </Field>
+        <Field>
+            <FieldLabel>Водительское удостоверение</FieldLabel>
+            <TextEdit @bind-Text="@UpdatedDriver.DriverLicense"/>
+        </Field>
+        <Field>
+            <FieldLabel>Адрес</FieldLabel>
+            <TextEdit @bind-Text="@UpdatedDriver.Address"/>
+        </Field>
+        <Field>
+            <FieldLabel>Телефон</FieldLabel>
+            <TextEdit @bind-Text="@UpdatedDriver.Phone"/>
+        </Field>
+    </CardBody>
+</Card>
+
+@code {
+    [Parameter]
+    public string Id { get; set; } = "";
+
+    private int DriverId { get; set; }
+    private DriverDto UpdatedDriver { get; set; } = new()
+    {
+        Id = 0,
+        Name = "",
+        Surname = "",
+        Patronymic = "",
+        Passport = "",
+        DriverLicense = "",
+        Address = "",
+        Phone = ""
+    };
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!int.TryParse(Id, out var id))
+        {
+            throw new Exception("Некорректный идентификатор водителя");
+        }
+        DriverId = id;
+        UpdatedDriver = await ApiClient.GetDriver(DriverId);
+        await base.OnInitializedAsync();
+    }
+
+    private async Task DeleteDriverAsync()
+    {
+        await ApiClient.DeleteDriver(DriverId);
+        await JsRuntime.InvokeVoidAsync("history.back");
+    }
+
+    private async Task UpdateDriverAsync()
+    {
+        var editedDriver = new DriverDto
+        {
+            Id = UpdatedDriver.Id,
+            Name = UpdatedDriver.Name,
+            Surname = UpdatedDriver.Surname,
+            Patronymic = UpdatedDriver.Patronymic,
+            Passport = UpdatedDriver.Passport,
+            DriverLicense = UpdatedDriver.DriverLicense,
+            Address = UpdatedDriver.Address,
+            Phone = UpdatedDriver.Phone
+        };
+        UpdatedDriver = await ApiClient.UpdateDriver(editedDriver);
+    }
+}

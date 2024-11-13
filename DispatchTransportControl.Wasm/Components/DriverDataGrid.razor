@@ -1,0 +1,117 @@
+﻿@using DispatchTransportControl.Shared.DTO
+@inject IApiClientWrapper ApiClient
+@inject NavigationManager NavManager
+
+<Card>
+    <CardHeader>
+        <Row Class="justify-content-between">
+            <Column ColumnSize="ColumnSize.IsAuto">
+                <h4>Водители</h4>
+            </Column>
+            <Column ColumnSize="ColumnSize.IsAuto">
+                <Button Color="Color.Primary" Clicked="OpenCreateModal">
+                    Создать
+                </Button>
+            </Column>
+        </Row>
+    </CardHeader>
+    <CardBody>
+        <DataGrid TItem="DriverDto"
+                  Data="Drivers"
+                  Responsive
+                  Striped>
+            <DataGridColumns>
+                <DataGridColumn Width="150px"
+                                TItem="DriverDto"
+                                Field="@nameof(DriverDto.Id)"
+                                Caption="Действия">
+                    <DisplayTemplate>
+                        <Dropdown>
+                            <DropdownToggle Color="Color.Primary">
+                                Действия
+                            </DropdownToggle>
+                            <DropdownMenu>
+                                <DropdownItem Clicked="() => OpenEditPageAsync(context)">
+                                    Редактировать
+                                </DropdownItem>
+                                <DropdownItem Clicked="() => DeleteDriverAsync(context)">
+                                    Удалить
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="DriverDto"
+                                Field="@nameof(DriverDto.Id)"
+                                Caption="Id">
+                </DataGridColumn>
+                <DataGridColumn TItem="DriverDto"
+                                Field="@nameof(DriverDto.Name)"
+                                Caption="Имя">
+                </DataGridColumn>
+                <DataGridColumn TItem="DriverDto"
+                                Field="@nameof(DriverDto.Surname)"
+                                Caption="Фамилия">
+                </DataGridColumn>
+                <DataGridColumn TItem="DriverDto"
+                                Field="@nameof(DriverDto.Patronymic)"
+                                Caption="Отчество">
+                </DataGridColumn>
+                <DataGridColumn TItem="DriverDto"
+                                Field="@nameof(DriverDto.Passport)"
+                                Caption="Паспорт">
+                </DataGridColumn>
+                <DataGridColumn TItem="DriverDto"
+                                Field="@nameof(DriverDto.DriverLicense)"
+                                Caption="Водительское удостоверение">
+                </DataGridColumn>
+                <DataGridColumn TItem="DriverDto"
+                                Field="@nameof(DriverDto.Address)"
+                                Caption="Адрес">
+                </DataGridColumn>
+                <DataGridColumn TItem="DriverDto"
+                                Field="@nameof(DriverDto.Phone)"
+                                Caption="Телефон">
+                </DataGridColumn>
+            </DataGridColumns>
+        </DataGrid>
+    </CardBody>
+</Card>
+
+<DriveCreateModal @ref="DriverCreateModal" OnDriverAdded="@HandleDriverAdded" />
+
+@code {
+    [Parameter]
+    public EventCallback OnDataChanged { get; set; }
+
+    private ICollection<DriverDto> Drivers { get; set; } = [];
+    private DriveCreateModal DriverCreateModal { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await RefreshDriverCollection();
+        await base.OnInitializedAsync();
+    }
+
+    private void OpenEditPageAsync(DriverDto context)
+    {
+        NavManager.NavigateTo($"driver/{context.Id}");
+    }
+
+    private async Task DeleteDriverAsync(DriverDto context)
+    {
+        await ApiClient.DeleteDriver(context.Id);
+        await RefreshDriverCollection();
+        await OnDataChanged.InvokeAsync();
+    }
+
+    private async Task HandleDriverAdded()
+    {
+        await RefreshDriverCollection();
+        await OnDataChanged.InvokeAsync();
+    }
+
+    private async Task OpenCreateModal() => await DriverCreateModal.Show();
+
+    private async Task RefreshDriverCollection() => Drivers = await ApiClient.GetDrivers();
+}
