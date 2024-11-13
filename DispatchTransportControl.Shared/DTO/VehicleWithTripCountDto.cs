@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace DispatchTransportControl.Api.DTO;
+namespace DispatchTransportControl.Shared.DTO;
 
 /// <summary>
 ///     DTO для транспортного средства и количества поездок

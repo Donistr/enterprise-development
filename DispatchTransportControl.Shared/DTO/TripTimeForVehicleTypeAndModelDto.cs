@@ -1,7 +1,6 @@
 ﻿using System.Text.Json.Serialization;
-using DispatchTransportControl.Domain.Entity;
 
-namespace DispatchTransportControl.Api.DTO;
+namespace DispatchTransportControl.Shared.DTO;
 
 /// <summary>
 ///     DTO для суммарного времени поездок данного типа транспортного средства и модели

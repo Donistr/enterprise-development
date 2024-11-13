@@ -1,4 +1,5 @@
 ﻿using DispatchTransportControl.Domain.Entity;
+using DispatchTransportControl.Shared;
 
 namespace DispatchTransportControl.Domain.Repository;
 

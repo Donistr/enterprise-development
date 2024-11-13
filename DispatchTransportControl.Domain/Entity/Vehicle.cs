@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using DispatchTransportControl.Shared;
 
 namespace DispatchTransportControl.Domain.Entity;
 
@@ -43,14 +44,4 @@ public class Vehicle
     [Column("year_of_manufacture")]
     [Required]
     public required int YearOfManufacture { get; set; }
-}
-
-/// <summary>
-///     Типы транспортных средств
-/// </summary>
-public enum VehicleType
-{
-    Bus,
-    Trolley,
-    Tram
 }

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using DispatchTransportControl.Api.DTO;
 using DispatchTransportControl.Domain.Entity;
 using DispatchTransportControl.Domain.Repository;
+using DispatchTransportControl.Shared.DTO;
 
 namespace DispatchTransportControl.Api.Service;
 

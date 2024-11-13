@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DispatchTransportControl.Do
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DispatchTransportControl.Api", "DispatchTransportControl.Api\DispatchTransportControl.Api.csproj", "{2398E7C2-BF2E-4D5F-A756-8C1F781C46FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DispatchTransportControl.Shared", "DispatchTransportControl.Shared\DispatchTransportControl.Shared.csproj", "{4D734579-F1D4-4DDE-8075-331243F8FA2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DispatchTransportControl.Wasm", "DispatchTransportControl.Wasm\DispatchTransportControl.Wasm.csproj", "{BDBC906F-662B-4A80-8428-068EB20CFDCB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +34,13 @@ Global
 		{2398E7C2-BF2E-4D5F-A756-8C1F781C46FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2398E7C2-BF2E-4D5F-A756-8C1F781C46FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2398E7C2-BF2E-4D5F-A756-8C1F781C46FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D734579-F1D4-4DDE-8075-331243F8FA2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D734579-F1D4-4DDE-8075-331243F8FA2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D734579-F1D4-4DDE-8075-331243F8FA2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D734579-F1D4-4DDE-8075-331243F8FA2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDBC906F-662B-4A80-8428-068EB20CFDCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDBC906F-662B-4A80-8428-068EB20CFDCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDBC906F-662B-4A80-8428-068EB20CFDCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDBC906F-662B-4A80-8428-068EB20CFDCB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

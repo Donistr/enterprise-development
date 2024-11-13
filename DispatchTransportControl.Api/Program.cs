@@ -7,6 +7,17 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowBlazorClient", policy =>
+    {
+        policy
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -28,6 +39,8 @@ builder.Services.AddScoped<IRouteAssignmentService, RouteAssignmentService>();
 builder.Services.AddControllers();
 
 var app = builder.Build();
+
+app.UseCors("AllowBlazorClient");
 
 app.UseMiddleware<ExceptionHandlerMiddleware>();
 

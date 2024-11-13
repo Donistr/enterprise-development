@@ -1,19 +1,12 @@
 ﻿using System.Text.Json.Serialization;
-using DispatchTransportControl.Domain.Entity;
 
-namespace DispatchTransportControl.Api.DTO;
+namespace DispatchTransportControl.Shared.DTO;
 
 /// <summary>
-///     DTO для изменения транспортного средства
+///     DTO для создания транспортного средства
 /// </summary>
-public class VehicleUpdateDto
+public class VehicleCreateDto
 {
-    /// <summary>
-    ///     Уникальный идентификатор
-    /// </summary>
-    [JsonPropertyName("id")]
-    public int Id { get; set; }
-
     /// <summary>
     ///     Гос. номер транспортного средства
     /// </summary>

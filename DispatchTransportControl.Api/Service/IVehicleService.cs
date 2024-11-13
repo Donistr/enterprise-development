@@ -1,4 +1,4 @@
-﻿using DispatchTransportControl.Api.DTO;
+﻿using DispatchTransportControl.Shared.DTO;
 
 namespace DispatchTransportControl.Api.Service;
 

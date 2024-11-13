@@ -1,5 +1,5 @@
-﻿using DispatchTransportControl.Api.DTO;
-using DispatchTransportControl.Api.Service;
+﻿using DispatchTransportControl.Api.Service;
+using DispatchTransportControl.Shared.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DispatchTransportControl.Api.Controller;
@@ -38,8 +38,7 @@ public class DriverController(IDriverService service) : ControllerBase
     [HttpPost]
     public ActionResult<DriverDto> CreateDriver(DriverCreateDto driver)
     {
-        var result = service.Create(driver);
-        return CreatedAtAction(nameof(GetDriver), new { id = result.Id }, result);
+        return Ok(service.Create(driver));
     }
 
     /// <summary>
@@ -64,7 +63,7 @@ public class DriverController(IDriverService service) : ControllerBase
     /// <summary>
     ///     Получение всех водителей, совершивших поездки за заданный период
     /// </summary>
-    [HttpPost("/get-all-by-period")]
+    [HttpPost("get-all-by-period")]
     public ActionResult<IEnumerable<DriverDto>> GetDriversByPeriod(TimePeriodDto dto)
     {
         return Ok(service.GetAllByPeriod(dto));
@@ -73,7 +72,7 @@ public class DriverController(IDriverService service) : ControllerBase
     /// <summary>
     ///     Получение топ 5 водителей по совершенному количеству поездок
     /// </summary>
-    [HttpGet("/get-top-5-drivers-by-trip-count")]
+    [HttpGet("get-top-5-drivers-by-trip-count")]
     public ActionResult<IEnumerable<DriverTripCountDto>> GetTop5DriversByTripCount()
     {
         return Ok(service.GetTop5DriversByTripCount());
@@ -82,7 +81,7 @@ public class DriverController(IDriverService service) : ControllerBase
     /// <summary>
     ///     Получение информации о количестве поездок, среднем времени и максимальном времени поездки для каждого водителя
     /// </summary>
-    [HttpGet("/get-drivers-trip-stats")]
+    [HttpGet("get-drivers-trip-stats")]
     public ActionResult<IEnumerable<DriverTripStatsDto>> GetDriverTripStats()
     {
         return Ok(service.GetDriverTripStats());

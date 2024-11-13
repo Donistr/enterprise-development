@@ -1,5 +1,6 @@
 ﻿using DispatchTransportControl.Domain.Context;
 using DispatchTransportControl.Domain.Entity;
+using DispatchTransportControl.Shared;
 using Microsoft.EntityFrameworkCore;
 
 namespace DispatchTransportControl.Domain.Repository;

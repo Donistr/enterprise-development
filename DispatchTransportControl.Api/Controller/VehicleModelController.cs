@@ -1,5 +1,5 @@
-﻿using DispatchTransportControl.Api.DTO;
-using DispatchTransportControl.Api.Service;
+﻿using DispatchTransportControl.Api.Service;
+using DispatchTransportControl.Shared.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DispatchTransportControl.Api.Controller;
@@ -38,8 +38,7 @@ public class VehicleModelController(IVehicleModelService service) : ControllerBa
     [HttpPost]
     public ActionResult<VehicleModelDto> CreateVehicleModel(VehicleModelCreateDto vehicleModel)
     {
-        var result = service.Create(vehicleModel);
-        return CreatedAtAction(nameof(GetVehicleModel), new { id = result.Id }, result);
+        return Ok(service.Create(vehicleModel));
     }
 
     /// <summary>

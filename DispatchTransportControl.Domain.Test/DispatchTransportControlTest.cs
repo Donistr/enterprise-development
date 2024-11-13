@@ -1,5 +1,5 @@
-﻿using DispatchTransportControl.Domain.Entity;
-using DispatchTransportControl.Domain.Repository;
+﻿using DispatchTransportControl.Domain.Repository;
+using DispatchTransportControl.Shared;
 
 namespace DispatchTransportControl.Domain.Test;
 

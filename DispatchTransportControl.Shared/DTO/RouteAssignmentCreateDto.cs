@@ -1,29 +1,23 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace DispatchTransportControl.Api.DTO;
+namespace DispatchTransportControl.Shared.DTO;
 
 /// <summary>
-///     DTO для назначения водителя и транспортного средства на маршрут
+///     DTO для создания назначения водителя и транспортного средства на маршрут
 /// </summary>
-public class RouteAssignmentDto
+public class RouteAssignmentCreateDto
 {
     /// <summary>
-    ///     Уникальный идентификатор
+    ///     Уникальный идентификатор транспортного средства
     /// </summary>
-    [JsonPropertyName("id")]
-    public int Id { get; set; }
+    [JsonPropertyName("vehicle_id")]
+    public required int VehicleId { get; set; }
 
     /// <summary>
-    ///     Транспортное средство
+    ///     Уникальный идентификатор водителя
     /// </summary>
-    [JsonPropertyName("vehicle")]
-    public required VehicleDto Vehicle { get; set; }
-
-    /// <summary>
-    ///     Водитель
-    /// </summary>
-    [JsonPropertyName("driver")]
-    public required DriverDto Driver { get; set; }
+    [JsonPropertyName("driver_id")]
+    public required int DriverId { get; set; }
 
     /// <summary>
     ///     Номер маршрута
