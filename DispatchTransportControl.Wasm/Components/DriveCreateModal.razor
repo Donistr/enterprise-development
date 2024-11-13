@@ -6,13 +6,13 @@
         <Form>
             <ModalHeader>
                 <ModalTitle>Новый водитель</ModalTitle>
-                <CloseButton Clicked="CloseDriverModalAsync" />
+                <CloseButton Clicked="CloseDriverModalAsync"/>
             </ModalHeader>
 
             <ModalBody>
                 <Field>
                     <FieldLabel>Имя</FieldLabel>
-                    <TextEdit @bind-Text="@NewDriver.Name" />
+                    <TextEdit @bind-Text="@NewDriver.Name"/>
                 </Field>
                 <Field>
                     <FieldLabel>Фамилия</FieldLabel>
@@ -49,10 +49,10 @@
 </Modal>
 
 @code {
-    [Parameter]
-    public EventCallback OnDriverAdded { get; set; }
+    [Parameter] public EventCallback OnDriverAdded { get; set; }
 
     private Modal DriverModal { get; set; } = new();
+
     private DriverCreateDto NewDriver { get; set; } = new()
     {
         Name = "",
@@ -64,9 +64,15 @@
         Phone = ""
     };
 
-    public async Task Show() => await DriverModal.Show();
+    public async Task Show()
+    {
+        await DriverModal.Show();
+    }
 
-    private async Task CloseDriverModalAsync() => await DriverModal.Hide();
+    private async Task CloseDriverModalAsync()
+    {
+        await DriverModal.Hide();
+    }
 
     private async Task CreateDriverAsync()
     {
@@ -74,4 +80,5 @@
         await DriverModal.Hide();
         await OnDriverAdded.InvokeAsync();
     }
+
 }

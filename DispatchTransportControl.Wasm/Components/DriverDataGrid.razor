@@ -78,11 +78,10 @@
     </CardBody>
 </Card>
 
-<DriveCreateModal @ref="DriverCreateModal" OnDriverAdded="@HandleDriverAdded" />
+<DriveCreateModal @ref="DriverCreateModal" OnDriverAdded="@HandleDriverAdded"/>
 
 @code {
-    [Parameter]
-    public EventCallback OnDataChanged { get; set; }
+    [Parameter] public EventCallback OnDataChanged { get; set; }
 
     private ICollection<DriverDto> Drivers { get; set; } = [];
     private DriveCreateModal DriverCreateModal { get; set; } = new();
@@ -111,7 +110,14 @@
         await OnDataChanged.InvokeAsync();
     }
 
-    private async Task OpenCreateModal() => await DriverCreateModal.Show();
+    private async Task OpenCreateModal()
+    {
+        await DriverCreateModal.Show();
+    }
 
-    private async Task RefreshDriverCollection() => Drivers = await ApiClient.GetDrivers();
+    private async Task RefreshDriverCollection()
+    {
+        Drivers = await ApiClient.GetDrivers();
+    }
+
 }

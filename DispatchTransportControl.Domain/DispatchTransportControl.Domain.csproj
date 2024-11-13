@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DispatchTransportControl.Shared\DispatchTransportControl.Shared.csproj" />
+        <ProjectReference Include="..\DispatchTransportControl.Shared\DispatchTransportControl.Shared.csproj"/>
     </ItemGroup>
 
 </Project>

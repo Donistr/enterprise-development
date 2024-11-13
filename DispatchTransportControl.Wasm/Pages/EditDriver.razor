@@ -5,7 +5,7 @@
 @inject IJSRuntime JsRuntime
 
 <Card>
-	<CardHeader>
+    <CardHeader>
         <Row Class="justify-content-between">
             <Column ColumnSize="ColumnSize.IsAuto">
                 <h4>Изменить водителя</h4>
@@ -22,12 +22,12 @@
                 </Button>
             </Column>
         </Row>
-	</CardHeader>
+    </CardHeader>
 
     <CardBody>
         <Field>
             <FieldLabel>Имя</FieldLabel>
-            <TextEdit @bind-Text="@UpdatedDriver.Name" />
+            <TextEdit @bind-Text="@UpdatedDriver.Name"/>
         </Field>
         <Field>
             <FieldLabel>Фамилия</FieldLabel>
@@ -57,10 +57,10 @@
 </Card>
 
 @code {
-    [Parameter]
-    public string Id { get; set; } = "";
+    [Parameter] public string Id { get; set; } = "";
 
     private int DriverId { get; set; }
+
     private DriverDto UpdatedDriver { get; set; } = new()
     {
         Id = 0,
@@ -79,6 +79,7 @@
         {
             throw new Exception("Некорректный идентификатор водителя");
         }
+
         DriverId = id;
         UpdatedDriver = await ApiClient.GetDriver(DriverId);
         await base.OnInitializedAsync();
@@ -105,4 +106,5 @@
         };
         UpdatedDriver = await ApiClient.UpdateDriver(editedDriver);
     }
+
 }
