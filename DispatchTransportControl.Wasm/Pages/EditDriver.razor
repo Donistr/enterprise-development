@@ -4,57 +4,69 @@
 @inject IApiClientWrapper ApiClient
 @inject IJSRuntime JsRuntime
 
-<Card>
-    <CardHeader>
-        <Row Class="justify-content-between">
-            <Column ColumnSize="ColumnSize.IsAuto">
-                <h4>Изменить водителя</h4>
-            </Column>
-            <Column ColumnSize="ColumnSize.IsAuto">
-                <Button Color="Color.Primary" Clicked="UpdateDriverAsync">
-                    Сохранить
-                </Button>
-                <Button Color="Color.Danger" Clicked="DeleteDriverAsync">
-                    Удалить
-                </Button>
-                <Button Color="Color.Secondary" onclick="history.back();">
-                    Закрыть
-                </Button>
-            </Column>
-        </Row>
-    </CardHeader>
+<EditForm Model="@UpdatedDriver" OnValidSubmit="UpdateDriverAsync">
+    <DataAnnotationsValidator/>
+    <Microsoft.AspNetCore.Components.Forms.ValidationSummary/>
 
-    <CardBody>
-        <Field>
-            <FieldLabel>Имя</FieldLabel>
-            <TextEdit @bind-Text="@UpdatedDriver.Name"/>
-        </Field>
-        <Field>
-            <FieldLabel>Фамилия</FieldLabel>
-            <TextEdit @bind-Text="@UpdatedDriver.Surname"/>
-        </Field>
-        <Field>
-            <FieldLabel>Отчество</FieldLabel>
-            <TextEdit @bind-Text="@UpdatedDriver.Patronymic"/>
-        </Field>
-        <Field>
-            <FieldLabel>Паспорт</FieldLabel>
-            <TextEdit @bind-Text="@UpdatedDriver.Passport"/>
-        </Field>
-        <Field>
-            <FieldLabel>Водительское удостоверение</FieldLabel>
-            <TextEdit @bind-Text="@UpdatedDriver.DriverLicense"/>
-        </Field>
-        <Field>
-            <FieldLabel>Адрес</FieldLabel>
-            <TextEdit @bind-Text="@UpdatedDriver.Address"/>
-        </Field>
-        <Field>
-            <FieldLabel>Телефон</FieldLabel>
-            <TextEdit @bind-Text="@UpdatedDriver.Phone"/>
-        </Field>
-    </CardBody>
-</Card>
+    <Card>
+        <CardHeader>
+            <Row Class="justify-content-between">
+                <Column ColumnSize="ColumnSize.IsAuto">
+                    <h4>Изменить водителя</h4>
+                </Column>
+                <Column ColumnSize="ColumnSize.IsAuto">
+                    <Button Color="Color.Primary" Type="ButtonType.Submit">
+                        Сохранить
+                    </Button>
+                    <Button Color="Color.Danger" Clicked="DeleteDriverAsync">
+                        Удалить
+                    </Button>
+                    <Button Color="Color.Secondary" onclick="history.back();">
+                        Закрыть
+                    </Button>
+                </Column>
+            </Row>
+        </CardHeader>
+
+        <CardBody>
+            <Field>
+                <FieldLabel>Имя</FieldLabel>
+                <TextEdit @bind-Text="@UpdatedDriver.Name"/>
+                <ValidationMessage For="@(() => UpdatedDriver.Name)"/>
+            </Field>
+            <Field>
+                <FieldLabel>Фамилия</FieldLabel>
+                <TextEdit @bind-Text="@UpdatedDriver.Surname"/>
+                <ValidationMessage For="@(() => UpdatedDriver.Surname)"/>
+            </Field>
+            <Field>
+                <FieldLabel>Отчество</FieldLabel>
+                <TextEdit @bind-Text="@UpdatedDriver.Patronymic"/>
+                <ValidationMessage For="@(() => UpdatedDriver.Patronymic)"/>
+            </Field>
+            <Field>
+                <FieldLabel>Паспорт</FieldLabel>
+                <TextEdit @bind-Text="@UpdatedDriver.Passport"/>
+                <ValidationMessage For="@(() => UpdatedDriver.Passport)"/>
+            </Field>
+            <Field>
+                <FieldLabel>Водительское удостоверение</FieldLabel>
+                <TextEdit @bind-Text="@UpdatedDriver.DriverLicense"/>
+                <ValidationMessage For="@(() => UpdatedDriver.DriverLicense)"/>
+            </Field>
+            <Field>
+                <FieldLabel>Адрес</FieldLabel>
+                <TextEdit @bind-Text="@UpdatedDriver.Address"/>
+                <ValidationMessage For="@(() => UpdatedDriver.Address)"/>
+            </Field>
+            <Field>
+                <FieldLabel>Телефон</FieldLabel>
+                <TextEdit @bind-Text="@UpdatedDriver.Phone"/>
+                <ValidationMessage For="@(() => UpdatedDriver.Phone)"/>
+            </Field>
+        </CardBody>
+    </Card>
+</EditForm>
 
 @code {
     [Parameter] public string Id { get; set; } = "";

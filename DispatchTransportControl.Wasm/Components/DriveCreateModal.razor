@@ -3,7 +3,10 @@
 
 <Modal @ref="DriverModal">
     <ModalContent Centered>
-        <Form>
+        <EditForm Model="@NewDriver" OnValidSubmit="CreateDriverAsync">
+            <DataAnnotationsValidator/>
+            <Microsoft.AspNetCore.Components.Forms.ValidationSummary/>
+
             <ModalHeader>
                 <ModalTitle>Новый водитель</ModalTitle>
                 <CloseButton Clicked="CloseDriverModalAsync"/>
@@ -13,38 +16,45 @@
                 <Field>
                     <FieldLabel>Имя</FieldLabel>
                     <TextEdit @bind-Text="@NewDriver.Name"/>
+                    <ValidationMessage For="@(() => NewDriver.Name)"/>
                 </Field>
                 <Field>
                     <FieldLabel>Фамилия</FieldLabel>
                     <TextEdit @bind-Text="@NewDriver.Surname"/>
+                    <ValidationMessage For="@(() => NewDriver.Surname)"/>
                 </Field>
                 <Field>
                     <FieldLabel>Отчество</FieldLabel>
                     <TextEdit @bind-Text="@NewDriver.Patronymic"/>
+                    <ValidationMessage For="@(() => NewDriver.Patronymic)"/>
                 </Field>
                 <Field>
                     <FieldLabel>Паспорт</FieldLabel>
                     <TextEdit @bind-Text="@NewDriver.Passport"/>
+                    <ValidationMessage For="@(() => NewDriver.Passport)"/>
                 </Field>
                 <Field>
                     <FieldLabel>Водительское удостоверение</FieldLabel>
                     <TextEdit @bind-Text="@NewDriver.DriverLicense"/>
+                    <ValidationMessage For="@(() => NewDriver.DriverLicense)"/>
                 </Field>
                 <Field>
                     <FieldLabel>Адрес</FieldLabel>
                     <TextEdit @bind-Text="@NewDriver.Address"/>
+                    <ValidationMessage For="@(() => NewDriver.Address)"/>
                 </Field>
                 <Field>
                     <FieldLabel>Телефон</FieldLabel>
                     <TextEdit @bind-Text="@NewDriver.Phone"/>
+                    <ValidationMessage For="@(() => NewDriver.Phone)"/>
                 </Field>
             </ModalBody>
 
             <ModalFooter>
                 <Button Color="Color.Secondary" Clicked="CloseDriverModalAsync">Отмена</Button>
-                <Button Color="Color.Primary" Clicked="CreateDriverAsync">Создать</Button>
+                <Button Color="Color.Primary" Type="ButtonType.Submit">Создать</Button>
             </ModalFooter>
-        </Form>
+        </EditForm>
     </ModalContent>
 </Modal>
 
